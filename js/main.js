@@ -30,6 +30,7 @@ var page = {
     page.returnLogin();
     page.newUserEvent();
     page.loadSideBar();
+    page.displayAvatar();
   },
 
     // AJAX - LOAD OLD MESSAGES
@@ -51,7 +52,7 @@ var page = {
           })
         },
         failure: function () {
-          console.log("FAILURE")
+        //  console.log("FAILURE")
         },
       })
     },
@@ -78,10 +79,10 @@ var page = {
         method: 'POST',
         data: newMessage,
         success: function() {
-          console.log("SUCCESS");
+        //  console.log("SUCCESS");
         },
         failure: function () {
-          console.log("FAILURE");
+        //  console.log("FAILURE");
         },
       })
     });
@@ -128,7 +129,7 @@ var page = {
           url: page.urlU,
           method:'GET',
           success: function (data){
-            console.log("SUCCESS" + data);
+            //console.log("SUCCESS" + data);
             userNameData = data;
             for (var i= 0; i < userNameData.length; i++){
               if (userNameData[i].username === userName){
@@ -156,10 +157,10 @@ var page = {
       method:"PUT",
       data:"status=true",
       success: function(data){
-      console.log('SUCCESS'+ data);
+      //console.log('SUCCESS'+ data);
       },
       failure: function(data){
-        console.log("FAIL ON STATUS CHANGE" + data);
+        //console.log("FAIL ON STATUS CHANGE" + data);
       }
     })
   },
@@ -189,15 +190,16 @@ var page = {
        email: userEmail,
        avatar: userAvatar,
      });
+
        $.ajax({     //AJAX PUSH TO SERVER
          url: page.urlU,
          method:"POST",
          data: userLoginAdd,
          success: function (data){
-           console.log("SUCCESS!", data);
+          // console.log("SUCCESS!", data);
          },
          failure: function (data) {
-           console.log("FAILURE!!!");
+          // console.log("FAILURE!!!");
          }
        });
    });
@@ -235,26 +237,31 @@ var page = {
     });
   },
 
-  createUser: function() {
+  signOutBtn: function() {
+    (".signout").on("click", "button", function(event){
+      event.preventDefault();
+      location.reload();
+});
+    },
 
 
-  },
 
-  displaytAvatar: function() {
-    $.ajax( {
-      url: page.urlU,
-      method: 'GET',
-      success: function(data) {
-        
-      }
-    });
+  displayAvatar: function(user) {
+    // $.ajax( {
+    //   url: page.urlU,
+    //   method: 'GET',
+    //   success: function(data) {
+    //
+    //   }
+    // });
+    console.log(user);
     var av = [
       "<img src='<%=avpic%>' alt='' /><p class='navbar-text'><%=avname%></p>"
     ].join("");
     var avtemp=_.template(av);
-    var active={avpic: $("input[name='avatar']").val() , avname: $("input[name='username']").val() };
+    var active={avpic: user.avatar , avname: user.username };
     var avatar = avtemp(active);
-    $(".avatar").html();
+    $(".avatar").html(avatar);
   },
 
 };
