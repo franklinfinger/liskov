@@ -238,7 +238,7 @@ var page = {
   },
 
   signOutBtn: function() {
-    (".signout").on("click", "button", function(event){
+    ("#reload").on("click", "navbar-btn", function(event){
       event.preventDefault();
       location.reload();
 });
@@ -260,8 +260,8 @@ var page = {
     ].join("");
     var avtemp=_.template(av);
     var active={avpic: user.avatar , avname: user.username };
-    var avatar = avtemp(active);
-    $(".avatar").html(avatar);
+    var inputAvatar = avtemp(active);
+    $(".avatar").html(inputAvatar);
   },
 
 };
