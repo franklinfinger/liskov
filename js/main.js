@@ -134,6 +134,7 @@ var page = {
               if (userNameData[i].username === userName){
                 $(".col-md-8").removeClass("hidden-class"); //REMOVES ALL HIDDEN CLASSES FROM CHATBOX
                 $(".col-md-4").removeClass("hidden-class");
+                $('.navbar-default').removeClass("hidden-class");
                 $('.messageWriter').removeClass("hidden-class");
                 $("#loginContainer").addClass("hidden-class");
                 var userNameDataIter = userNameData[i];
@@ -239,8 +240,14 @@ var page = {
 
   },
 
-  deleteUser: function() {
-
+  displaytAvatar: function() {
+    var av = [
+      "<img src='<%=avpic%>' alt='' /><p class='navbar-text'><%=avname%></p>"
+    ].join("");
+    var avtemp=_.template(av);
+    var active={avpic: $("input[name='avatar']").val() , avname: $("input[name='username']").val() };
+    var avatar = avtemp(active);
+    $(".avatar").html();
   },
 
 };
