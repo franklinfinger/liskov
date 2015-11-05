@@ -241,6 +241,13 @@ var page = {
   },
 
   displaytAvatar: function() {
+    $.ajax( {
+      url: page.urlU,
+      method: 'GET',
+      success: function(data) {
+        
+      }
+    });
     var av = [
       "<img src='<%=avpic%>' alt='' /><p class='navbar-text'><%=avname%></p>"
     ].join("");
